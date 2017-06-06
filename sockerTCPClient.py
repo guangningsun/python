@@ -26,7 +26,7 @@ while True:
         break
     tcpCliSock.send("%s\r\n" % data)
     resp = tcpCliSock.recv(BUFSIZ)
-    if not data:
+    if not resp:
         break
     print resp
-    tcpCliSock.close()
+tcpCliSock.close()
