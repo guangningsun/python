@@ -12,8 +12,11 @@ ADDR = (HOST, PORT)
 class MyRequestHandler(SRH):
     def handle(self):
         print 'connected from ',self.client_address
-        data = raw_input('>>>>>')
-        self.wfile.write("[%s] %s" % (ctime(), data))
+        self.data = self.request.recv(1024).strip()
+        if self.data:
+            print self.data
+        data_input = raw_input('>>>>>')
+        self.wfile.write("[%s] %s" % (ctime(), data_input))
 
 tcpServ = TCP(ADDR, MyRequestHandler)
 print 'waiting for connection...'
