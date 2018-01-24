@@ -4,6 +4,7 @@
 from SocketServer import (TCPServer as TCP, StreamRequestHandler as SRH)
 import socket
 from time import ctime
+import sys
 
 HOST = '127.0.0.1'
 PORT = 21567
@@ -18,6 +19,9 @@ class MyRequestHandler(SRH):
         data_input = raw_input('>>>>>')
         self.wfile.write("[%s] %s" % (ctime(), data_input))
 
-tcpServ = TCP(ADDR, MyRequestHandler)
-print 'waiting for connection...'
-tcpServ.serve_forever()
+try:
+    tcpServ = TCP(ADDR, MyRequestHandler)
+    print 'waiting for connection...'
+    tcpServ.serve_forever()
+except KeyboardInterrupt:
+    sys.exit()
